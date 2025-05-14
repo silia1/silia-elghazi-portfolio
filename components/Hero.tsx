@@ -45,18 +45,33 @@ export default function Hero() {
   </a>
 </div>
 
+<div className="flex space-x-6 mt-12">
+  <a
+    href="https://www.linkedin.com/in/silia1"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-white hover:text-red-500 transition-colors"
+  >
+    <LinkedinIcon size={24} />
+  </a>
+  <a
+    href="https://github.com/silia1"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-white hover:text-red-500 transition-colors"
+  >
+    <GithubIcon size={24} />
+  </a>
+  <a
+    href="https://silia1.github.io/portfolio/index.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-white hover:text-red-500 transition-colors"
+  >
+    <BehanceIcon size={24} />
+  </a>
+</div>
 
-              <div className="flex space-x-6 mt-12">
-                <a href="#" className="text-white hover:text-red-500 transition-colors">
-                  <LinkedinIcon size={24} />
-                </a>
-                <a href="#" className="text-white hover:text-red-500 transition-colors">
-                  <GithubIcon size={24} />
-                </a>
-                <a href="#" className="text-white hover:text-red-500 transition-colors">
-                  <BehanceIcon size={24} />
-                </a>
-              </div>
             </motion.div>
 
             {/* RIGHT SIDE — Blob + Image */}
