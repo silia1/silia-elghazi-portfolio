@@ -36,13 +36,7 @@ export default function Hero() {
     Contact
   </a>
 
-  <a 
-    href="/silia.pdf"
-    download
-    className="bg-red-500 text-white px-8 py-3 rounded-full hover:bg-red-600 transition-colors"
-  >
-    Download my CV
-  </a>
+  
 </div>
 
 <div className="flex space-x-6 mt-12">
