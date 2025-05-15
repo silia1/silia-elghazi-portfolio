@@ -29,12 +29,6 @@ export default function Contact() {
               </a>
             </div>
             <div className="flex items-center">
-              <PhoneIcon className="w-6 h-6 mr-4 text-red-500" />
-              <a href="tel:0723530211" className="hover:text-red-500 transition-colors">
-                0723530211
-              </a>
-            </div>
-            <div className="flex items-center">
               <LinkedinIcon className="w-6 h-6 mr-4 text-red-500" />
               <a href="https://linkedin.com/in/silia-el-ghazi" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors">
                 linkedin.com/in/silia-el-ghazi

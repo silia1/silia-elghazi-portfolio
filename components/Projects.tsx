@@ -12,11 +12,11 @@ const projects = [
     description: "Spring Boot, React.js, PostgreSQL, Python",
     image: "/Mirai2.jpg",
     github: "https://github.com/silia1/MIRAI.git",
-    demo: "/Mirai.mp4",
+    demo: "https://vimeo.com/1084556075", // Mis à jour avec le lien Vimeo
   },
   {
     title: "EMOVISION – Real-Time Emotion Detection with Computer Vision",
-    description: "Python, OpenCV, TensorFlow, Keras, NumPy, CNN, Streamlit, Flask",
+    description: "Python, OpenCV, TensorFlow, NumPy, Pandas, CNN, Matplotlib, Streamlit, Flask",
     image: "/9.png",
     github: "https://github.com/silia1/EMOVISION-MLOPS-project-.git",
   },
@@ -129,6 +129,20 @@ export default function Projects() {
 
   const scrollToProjects = () => {
     containerRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  // Fonction pour extraire l'ID Vimeo et créer l'URL d'intégration
+  const getVimeoEmbedUrl = (url: string) => {
+    // Extraire l'ID de la vidéo Vimeo
+    const vimeoRegex = /(?:vimeo\.com\/)(\d+)/
+    const match = url.match(vimeoRegex)
+
+    if (match && match[1]) {
+      const videoId = match[1]
+      return `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
+    }
+
+    return url
   }
 
   return (
@@ -384,6 +398,15 @@ export default function Projects() {
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  ></iframe>
+                ) : videoUrl.includes("vimeo.com") ? (
+                  <iframe
+                    src={getVimeoEmbedUrl(videoUrl)}
+                    className="w-full h-full"
+                    allowFullScreen
+                    title="Vimeo video player"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
                   ></iframe>
                 ) : (
                   <video src={videoUrl} controls autoPlay className="w-full h-full">
