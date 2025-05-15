@@ -12,7 +12,8 @@ const projects = [
     description: "Spring Boot, React.js, PostgreSQL, Python",
     image: "/Mirai2.jpg",
     github: "https://github.com/silia1/MIRAI.git",
-    demo: "https://vimeo.com/1084556075", // Mis à jour avec le lien Vimeo
+    demo: "https://vimeo.com/1084556075", // Lien Vimeo
+    isExternalDemo: true, // Nouveau flag pour indiquer que c'est un lien externe
   },
   {
     title: "EMOVISION – Real-Time Emotion Detection with Computer Vision",
@@ -103,9 +104,15 @@ export default function Projects() {
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const openVideo = (url: string) => {
-    setVideoUrl(url)
-    setShowVideo(true)
+  const openVideo = (url: string, isExternal = false) => {
+    if (isExternal) {
+      // Ouvrir dans un nouvel onglet si c'est un lien externe
+      window.open(url, "_blank", "noopener,noreferrer")
+    } else {
+      // Sinon, utiliser le modal comme avant
+      setVideoUrl(url)
+      setShowVideo(true)
+    }
   }
 
   const closeVideo = () => {
@@ -129,20 +136,6 @@ export default function Projects() {
 
   const scrollToProjects = () => {
     containerRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
-  // Fonction pour extraire l'ID Vimeo et créer l'URL d'intégration
-  const getVimeoEmbedUrl = (url: string) => {
-    // Extraire l'ID de la vidéo Vimeo
-    const vimeoRegex = /(?:vimeo\.com\/)(\d+)/
-    const match = url.match(vimeoRegex)
-
-    if (match && match[1]) {
-      const videoId = match[1]
-      return `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
-    }
-
-    return url
   }
 
   return (
@@ -244,7 +237,7 @@ export default function Projects() {
                         </motion.a>
                         {project.demo && (
                           <motion.button
-                            onClick={() => openVideo(project.demo!)}
+                            onClick={() => openVideo(project.demo!, project.isExternalDemo)}
                             className="text-gray-300 hover:text-orange-500 transition-colors"
                             whileHover={{ scale: 1.2, rotate: -5 }}
                             aria-label="View demo"
@@ -257,10 +250,10 @@ export default function Projects() {
 
                     {project.demo && (
                       <button
-                        onClick={() => openVideo(project.demo!)}
+                        onClick={() => openVideo(project.demo!, project.isExternalDemo)}
                         className="mt-3 text-sm px-4 py-2 rounded-md bg-gradient-to-r from-orange-500 to-red-600 text-white hover:from-orange-600 hover:to-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
                       >
-                        View Demo
+                        {project.isExternalDemo ? "Watch on Vimeo" : "View Demo"}
                       </button>
                     )}
                   </div>
@@ -363,7 +356,7 @@ export default function Projects() {
         </AnimatePresence>
       </div>
 
-      {/* Video Modal */}
+      {/* Video Modal - Uniquement pour les vidéos non-Vimeo */}
       <AnimatePresence>
         {showVideo && (
           <motion.div
@@ -398,15 +391,6 @@ export default function Projects() {
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  ></iframe>
-                ) : videoUrl.includes("vimeo.com") ? (
-                  <iframe
-                    src={getVimeoEmbedUrl(videoUrl)}
-                    className="w-full h-full"
-                    allowFullScreen
-                    title="Vimeo video player"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture"
                   ></iframe>
                 ) : (
                   <video src={videoUrl} controls autoPlay className="w-full h-full">
